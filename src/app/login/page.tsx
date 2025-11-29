@@ -57,7 +57,6 @@ export default function LoginPage() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0b0f19] px-4">
-      {/* ===== Background animated shapes ===== */}
       <motion.div
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -89,7 +88,6 @@ export default function LoginPage() {
         className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-purple-500/30 blur-[100px]"
       />
 
-      {/* ===== Login Card ===== */}
       <motion.div
         initial={{ opacity: 0, y: 35 }}
         animate={{ opacity: 1, y: 0 }}
@@ -106,7 +104,6 @@ export default function LoginPage() {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          {/* Email */}
           <div>
             <label className="mb-1 block text-sm text-gray-200">
               البريد الإلكتروني
@@ -124,7 +121,6 @@ export default function LoginPage() {
             )}
           </div>
 
-          {/* Password */}
           <div>
             <label className="mb-1 block text-sm text-gray-200">
               كلمة المرور
@@ -142,13 +138,11 @@ export default function LoginPage() {
             )}
           </div>
 
-          {/* Role - custom dropdown */}
           <div className="relative">
             <label className="mb-1 block text-sm text-gray-200">
               الدور (Role)
             </label>
 
-            {/* hidden select just for react-hook-form compatibility */}
             <select
               {...register("role")}
               className="hidden"
@@ -162,7 +156,6 @@ export default function LoginPage() {
               ))}
             </select>
 
-            {/* visible custom dropdown */}
             <button
               type="button"
               onClick={() => setRoleOpen((o) => !o)}
@@ -209,7 +202,6 @@ export default function LoginPage() {
             )}
           </div>
 
-          {/* Submit */}
           <motion.button
             whileTap={{ scale: 0.95 }}
             disabled={isSubmitting}

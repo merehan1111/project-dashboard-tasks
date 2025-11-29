@@ -1,16 +1,20 @@
+import type { Metadata } from "next";
 import "./globals.css";
-import Providers from "@/providers/Providers";
-import type { ReactNode } from "react";
+import Providers from "@/providers/Providers"; // 👈 خدي بالك من الباث
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Project Dashboard",
-  description: "Feature-rich project dashboard web app"
+  description: "Assessment Task Project Dashboard",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-slate-950 text-slate-50">
         <Providers>{children}</Providers>
       </body>
     </html>

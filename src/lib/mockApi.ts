@@ -10,7 +10,7 @@ let projects: Project[] = [
     progress: 65,
     budget: 25000,
     owner: "Alice",
-    priority: "High"
+    priority: "High",
   },
   {
     id: "2",
@@ -21,7 +21,7 @@ let projects: Project[] = [
     progress: 10,
     budget: 50000,
     owner: "Bob",
-    priority: "Medium"
+    priority: "Medium",
   },
   {
     id: "3",
@@ -32,21 +32,26 @@ let projects: Project[] = [
     progress: 30,
     budget: 15000,
     owner: "Carol",
-    priority: "Low"
-  }
+    priority: "Low",
+  },
 ];
 
 const projectTasks: Record<string, Task[]> = {
   "1": [
     { id: "t1", title: "Design system", status: "Done", assignee: "Alice" },
-    { id: "t2", title: "Landing page", status: "In Progress", assignee: "David" }
+    { id: "t2", title: "Landing page", status: "In Progress", assignee: "David" },
   ],
   "2": [
-    { id: "t3", title: "Wireframes", status: "Todo", assignee: "Bob" }
+    { id: "t3", title: "Wireframes", status: "Todo", assignee: "Bob" },
   ],
   "3": [
-    { id: "t4", title: "Audience research", status: "In Progress", assignee: "Erin" }
-  ]
+    {
+      id: "t4",
+      title: "Audience research",
+      status: "In Progress",
+      assignee: "Erin",
+    },
+  ],
 };
 
 export interface ListParams {
@@ -69,7 +74,7 @@ export async function listProjects(params: ListParams) {
     priority = "All",
     owner,
     sortBy = "name",
-    sortDir = "asc"
+    sortDir = "asc",
   } = params;
 
   let filtered = [...projects];
@@ -128,13 +133,17 @@ export async function listTasks(projectId: string) {
   return projectTasks[projectId] || [];
 }
 
-export async function addTask(projectId: string, title: string, assignee: string) {
+export async function addTask(
+  projectId: string,
+  title: string,
+  assignee: string
+) {
   await new Promise((r) => setTimeout(r, 200));
   const t: Task = {
     id: Math.random().toString(36).slice(2),
     title,
     status: "Todo",
-    assignee
+    assignee,
   };
   projectTasks[projectId] = [...(projectTasks[projectId] || []), t];
   return t;
@@ -151,4 +160,17 @@ export async function updateTasksStatus(
       taskIds.includes(t.id) ? { ...t, status } : t
     ) ?? [];
   return projectTasks[projectId];
+}
+
+export async function updateTask(
+  projectId: string,
+  taskId: string,
+  patch: Partial<Pick<Task, "title" | "assignee" | "status">>
+) {
+  await new Promise((r) => setTimeout(r, 200));
+  const tasks = projectTasks[projectId] || [];
+  projectTasks[projectId] = tasks.map((t) =>
+    t.id === taskId ? { ...t, ...patch } : t
+  );
+  return projectTasks[projectId].find((t) => t.id === taskId) || null;
 }

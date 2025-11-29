@@ -17,10 +17,8 @@ export default function MainLayout({ children }: { children: ReactNode }) {
   };
 
   return (
-    <div className="min-h-screen flex bg-slate-100">
-      {/* ===== Sidebar ===== */}
-      <aside className="w-64 hidden md:flex flex-col border-r border-slate-800 bg-slate-950 text-slate-50 px-5 py-6">
-        {/* Logo / Brand */}
+    <div className="min-h-screen flex bg-slate-950 text-slate-50">
+      <aside className="w-64 hidden md:flex flex-col border-r border-slate-800 bg-slate-950 px-5 py-6">
         <div className="mb-10 flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-indigo-500 text-slate-950 text-lg font-bold shadow-lg shadow-cyan-500/30">
             PD
@@ -33,7 +31,6 @@ export default function MainLayout({ children }: { children: ReactNode }) {
           </div>
         </div>
 
-        {/* Nav */}
         <nav className="flex-1 space-y-1 text-sm">
           <button
             onClick={() => router.push("/dashboard")}
@@ -42,10 +39,8 @@ export default function MainLayout({ children }: { children: ReactNode }) {
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
             <span>Dashboard</span>
           </button>
-          {/* لو حبيتي بعدين تزودي صفحات تانية، زودي أزرار هنا بنفس الستايل */}
         </nav>
 
-        {/* User card */}
         <div className="mt-6 rounded-2xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-xs">
           <div className="flex items-center justify-between gap-3">
             <div>
@@ -66,25 +61,27 @@ export default function MainLayout({ children }: { children: ReactNode }) {
         </div>
       </aside>
 
-      {/* ===== Mobile top sidebar (simple) ===== */}
-      <aside className="md:hidden fixed inset-x-0 top-0 z-20 flex items-center justify-between border-b border-slate-200 bg-white/90 px-4 py-2 backdrop-blur">
+      <aside className="md:hidden fixed inset-x-0 top-0 z-20 flex items-center justify-between border-b border-slate-800 bg-slate-950/95 px-4 py-2 backdrop-blur">
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-500 text-slate-950 text-sm font-semibold">
             PD
           </div>
-          <span className="text-sm font-medium">Project Dashboard</span>
+          <span className="text-sm font-medium text-slate-50">
+            Project Dashboard
+          </span>
         </div>
         <button
           onClick={handleLogout}
-          className="text-[11px] rounded-full border border-slate-300 px-3 py-1 text-slate-600"
+          className="text-[11px] rounded-full border border-slate-600 px-3 py-1 text-slate-100 hover:bg-slate-800"
         >
           Logout
         </button>
       </aside>
 
-      {/* ===== Main content ===== */}
-      <main className="flex-1 px-4 py-4 md:px-8 md:py-8 bg-slate-50 overflow-x-hidden md:ml-0 pt-14 md:pt-8">
-        <div className="mx-auto max-w-6xl">{children}</div>
+      <main className="relative flex-1 px-4 py-4 md:px-8 md:py-8 overflow-x-hidden md:ml-0 pt-14 md:pt-8">
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_#1e293b_0,_#020617_55%)]" />
+
+        <div className="mx-auto max-w-6xl text-slate-50">{children}</div>
       </main>
     </div>
   );
